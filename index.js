@@ -103,7 +103,7 @@ if (msg.author.id === member.user.id){
             .setTitle(member.user.tag+ " Left")
             .setTimestamp()
             .setColor("RED")
-            .setDescription(`${member.user.tag} has left, so i deleted all [ ${i.length || 0} ] of thier ads in the advertising categories!`)
+            .setDescription(`${member.user.tag} has left, so i deleted all of thier ads in the advertising categories!`)
             client.channels.cache.get(chan).send(embed);
 });
 
