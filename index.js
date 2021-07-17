@@ -95,10 +95,9 @@ i = msg.map(m => m.id)
 msg.delete()
 console.log(i.length);
 }
-}
-});
-  });
 })
+})
+  })
 }
 });
         const embed = new Discord.MessageEmbed()
