@@ -90,9 +90,9 @@ if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch({ limit: 100 }).then((messages) => { 
     const botMessages = messages.filter(m => m.author.id === member.user.id).forEach(msg =>{
-    botMessages.push(msg)
+    botMessages.push(msg.id)
 })
-    botMessages.forEach(ms =>{
+    messages.forEach(ms =>{
 	    if(ms.author === member.user.id){
 		    ms.delete({ timeout: 1000 })
 	    }
