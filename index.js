@@ -100,7 +100,6 @@ child.messages.fetch({ limit: 100 }).then((messages) => {
 	i = botMessages.size;
 	})
 })
-  })
 }
 });
         const embed = new Discord.MessageEmbed()
