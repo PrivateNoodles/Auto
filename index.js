@@ -44,6 +44,7 @@ await fetch(`https://discord.com/api/invite/${code}`)
 	await message.delete({ timeout: 1000 });
 	const EMB = new Discord.MessageEmbed()
 	.setTitle(`Auto Moderation For: `+ message.author.username+"#"+message.author.discriminator)
+	.setColor("ORANGE")
 	.setDescription(`Your ad has been removed from the channel:\n${message.channel}\n Reason being the following:\n`+json.message)
 	ch.send(`${message.author}`, EMB)
 	console.log("unknown!");
@@ -63,6 +64,7 @@ await fetch(`https://discord.com/api/invite/${code}`)
 :x: Dm advertising will result in an immediate ban.
 :x: Once you leave the server all your ads will get automatically deleted.
 	`)
+	.setColor("BLUE")
 	.setFooter(`Need help/support? Open a ModMail thread by contacting @Light Support. Bot`)
 	message.channel.send(EMBED);
   }
