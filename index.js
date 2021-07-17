@@ -88,13 +88,12 @@ var i = 0;
 config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
-	child.messages.fetch().then(m =>{
-		const asas = m.filter(msz => msz.author.id === member.user.id)
-		i = asas.size;
-				    })
 child.messages.fetch().then(messages => {
     messages.forEach(msg =>{ 
-if (msg.author.id === member.user.id){ msg.delete()};
+if (msg.author.id === member.user.id){
+	i++;
+	msg.delete()
+	};
   });
 })
 })
