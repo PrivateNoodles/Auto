@@ -83,47 +83,31 @@ await fetch(`https://discord.com/api/invite/${code}`)
 		}
 	}
 })
+let i;
 client.on('guildMemberRemove', async (member) => {
-const categoryChannels = member.guild.channels.cache.filter(channel => channel.type === "category");
-    categoryChannels.forEach(cat=> {
-if(cat.id === CATO){
-const ch = cat.children.forEach(child =>{
+i = 1;
+ config.catz.forEach(cat => {
+if(member.guild.channels.cache.get(cat).id === cat){
+member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch().then(messages => {
-    messages.forEach(msg =>{ 
-if (msg.author.id === member.user.id){ msg.delete()};
+    messages.forEach(msg =>{
+if (msg.author.id === member.user.id){
+for (var i = 0; i < msg.length; i++){
+msg.delete()
+console.log(msg.length);
+}
+}
+});
   });
-})
 })
 }
 });
-    categoryChannels.forEach(cat=> {
-if(cat.id === CATTW){
-const ch = cat.children.forEach(child =>{
-child.messages.fetch().then(messages => {
-    messages.forEach(msg =>{ 
-if (msg.author.id === member.user.id){ msg.delete()};
-  });
-})
-})
-}
-}) ;
-    categoryChannels.forEach(cat=> {
-if(cat.id === CATTH){
-const ch = cat.children.forEach(child =>{
-child.messages.fetch().then(messages => {
-    messages.forEach(msg =>{ 
-if (msg.author.id === member.user.id){ msg.delete()};
-  });
-})
-})
-}
-})
         const embed = new Discord.MessageEmbed()
             .setTitle(member.user.tag+ " Left")
             .setTimestamp()
             .setColor("RED")
-            .setDescription(`${member.user.tag} has left, so i deleted all of thier ads in the advertising categories!`)
-            client.channels.cache.get(chnls).send(embed);
+            .setDescription(`${member.user.tag} has left, so i deleted all [ ${i} ] of thier ads in the advertising categories!`)
+            client.channels.cache.get(chan).send(embed);
 });
 
 client.login("NzgyODg5NTE1MDg5OTIwMDEw.X8SwrQ.n6j8sLSKKe7k8jZrOljPV-SL8cM");
