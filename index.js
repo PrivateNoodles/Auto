@@ -89,7 +89,7 @@ config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch().then(messages => {
-    messages.forEach(msg =>{
+    messages.forEach(async(msg) =>{
 if (msg.author.id === member.user.id){
 await i.push[msg.id]
 msg.delete({timeout: 1000 })
