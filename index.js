@@ -84,21 +84,19 @@ await fetch(`https://discord.com/api/invite/${code}`)
 	}
 })
 client.on('guildMemberRemove', async (member) => {
-let i = [];
+var i = 0;
 config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
-child.messages.fetch({ limit: 100 }).then((messages) => { 
-    const botMessages = messages.filter(m => m.author.id === member.user.id).forEach(msg =>{
-    botMessages.push(msg.id)
+	child.messages.fetch().then(m =>{
+		m.filter(m.author.id === member.user.id)
+		i = m.size;
+				    })
+child.messages.fetch().then(messages => {
+    messages.forEach(msg =>{ 
+if (msg.author.id === member.user.id){ msg.delete()};
+  });
 })
-    messages.forEach(ms =>{
-	    if(ms.author === member.user.id){
-		    ms.delete({ timeout: 1000 })
-	    }
-			     })
-	i = botMessages.size;
-	})
 })
 }
 });
