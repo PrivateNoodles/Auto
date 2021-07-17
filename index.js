@@ -88,14 +88,13 @@ let i = [];
 config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
-child.messages.fetch().then(messages => {
-    messages.forEach(async(msg) =>{
-if (msg.author.id === member.user.id){
-await i.push[msg.id]
-msg.delete({timeout: 1000 })
-console.log(i.length);
-}
+child.messages.fetch({ limit: 1000 }).then((messages) => { 
+    const botMessages = messages.cache.filter(m => m.author.id === member.user.id).forEach(msg =>
+    botMessages.push(msg)
 })
+    messages.channel.bulkDelete(botMessages).then(() => {
+        i = botMessages.size;
+	})
 })
   })
 }
