@@ -85,8 +85,7 @@ await fetch(`https://discord.com/api/invite/${code}`)
 })
 let i;
 client.on('guildMemberRemove', async (member) => {
-i = 1;
- config.catz.forEach(cat => {
+config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch().then(messages => {
