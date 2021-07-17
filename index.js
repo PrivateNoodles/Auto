@@ -89,7 +89,7 @@ config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch({ limit: 100 }).then((messages) => { 
-    const botMessages = messages.cache.filter(m => m.author.id === member.user.id).forEach(msg =>{
+    const botMessages = messages.filter(m => m.author.id === member.user.id).forEach(msg =>{
     botMessages.push(msg)
 })
     messages.channel.bulkDelete(botMessages).then(() => {
