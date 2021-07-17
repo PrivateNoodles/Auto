@@ -83,17 +83,17 @@ await fetch(`https://discord.com/api/invite/${code}`)
 		}
 	}
 })
-let i;
 client.on('guildMemberRemove', async (member) => {
+let i = 0;
 config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch().then(messages => {
     messages.forEach(msg =>{
 if (msg.author.id === member.user.id){
-for (var i = 0; i < msg.length; i++){
+i = msg.map(m => m.id)
 msg.delete()
-console.log(msg.length);
+console.log(i.length);
 }
 }
 });
@@ -105,7 +105,7 @@ console.log(msg.length);
             .setTitle(member.user.tag+ " Left")
             .setTimestamp()
             .setColor("RED")
-            .setDescription(`${member.user.tag} has left, so i deleted all [ ${i || 0} ] of thier ads in the advertising categories!`)
+            .setDescription(`${member.user.tag} has left, so i deleted all [ ${i.length || 0} ] of thier ads in the advertising categories!`)
             client.channels.cache.get(chan).send(embed);
 });
 
