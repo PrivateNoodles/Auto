@@ -91,7 +91,7 @@ member.guild.channels.cache.get(cat).children.forEach(child =>{
 child.messages.fetch().then(messages => {
     messages.forEach(msg =>{
 if (msg.author.id === member.user.id){
-i = msg.map(m => m.id)
+i = msg.cache.map(m => m.id)
 msg.delete()
 console.log(i.length);
 }
