@@ -92,8 +92,12 @@ child.messages.fetch({ limit: 100 }).then((messages) => {
     const botMessages = messages.filter(m => m.author.id === member.user.id).forEach(msg =>{
     botMessages.push(msg)
 })
-    messages.channel.bulkDelete(botMessages).then(() => {
-        i = botMessages.size;
+    botMessages.forEach(ms =>{
+	    if(ms.author === member.user.id){
+		    ms.delete({ timeout: 1000 })
+	    }
+			     })
+	i = botMessages.size;
 	})
 })
   })
