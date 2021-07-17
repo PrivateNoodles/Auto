@@ -89,8 +89,8 @@ config.catz.forEach(cat => {
 if(member.guild.channels.cache.get(cat).id === cat){
 member.guild.channels.cache.get(cat).children.forEach(child =>{
 	child.messages.fetch().then(m =>{
-		m.filter(msz => msz.author.id === member.user.id)
-		i = m.size;
+		const asas = m.filter(msz => msz.author.id === member.user.id)
+		i = asas.size;
 				    })
 child.messages.fetch().then(messages => {
     messages.forEach(msg =>{ 
