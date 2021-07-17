@@ -33,9 +33,9 @@ client.on("message", async(message) =>{
 if (message.author.bot || !message.guild) return;
 if (message.guild.id !== guild) return;
 
+const ch = message.guild.channels.cache.get(chan);
 const code = message.content.match(/(?<=discord.gg\/)(.\S*)/g);
 if (code){
-const ch = message.guild.channels.cache.get(chan);
 if (pa.includes(message.channel.parentID)){
 await fetch(`https://discord.com/api/invite/${code}`)
  .then((res) => res.json())
@@ -71,6 +71,17 @@ await fetch(`https://discord.com/api/invite/${code}`)
  });
 }
 }
+	if(!code){
+		if (pa.includes(message.channel.parentID)){
+	await message.delete({ timeout: 1000 });
+	const EMB = new Discord.MessageEmbed()
+	.setTitle(`Auto Moderation For: `+ message.author.username+"#"+message.author.discriminator)
+	.setColor("ORANGE")
+	.setDescription(`Your ad has been removed from the channel:\n${message.channel}\n Reason being the following:\n`+"`No invite Provided in Description`")
+	ch.send(`${message.author}`, EMB)
+	console.log("unknown!");
+		}
+	}
 })
 client.on('guildMemberRemove', async (member) => {
 const categoryChannels = member.guild.channels.cache.filter(channel => channel.type === "category");
@@ -109,7 +120,6 @@ if (msg.author.id === member.user.id){ msg.delete()};
 })
         const embed = new Discord.MessageEmbed()
             .setTitle(member.user.tag+ " Left")
-            .setThumbnail(member.guild.iconURL({ dynamic: true }))
             .setTimestamp()
             .setColor("RED")
             .setDescription(`${member.user.tag} has left, so i deleted all of thier ads in the advertising categories!`)
