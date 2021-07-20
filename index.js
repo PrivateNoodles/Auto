@@ -21,7 +21,7 @@ const client = new Discord.Client({
 });
 require("dotenv").config()
 require('discord-reply');
-const Database = require("quickmongo");
+const { Database } = require("quickmongo");
 const db = new Database(process.env.Mongo)
 const countsdb = db;
 const ticketschannelsdb = db;
