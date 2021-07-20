@@ -9,11 +9,11 @@
     		"type": "streaming"
     	},
     	"chnl": "811502956650037249"
-	},
-  "category_id": "866911521274986506",
-  "prefix": "]",
-  "status": "with tickets + Deleted messages",
-  "log_channel_id": "866905138103189525",
-  "support_1": "798110384845619220",
-  "support_2": "775998302902550542",
-  "support_3": "775998302889050138"
+	"category_id": "866911521274986506",
+	"prefix": "]",
+	"status": "with tickets + Deleted messages",
+	"log_channel_id": "866905138103189525",
+	"support_1": "798110384845619220",
+	"support_2": "775998302902550542",
+	"support_3": "775998302889050138"
+}
