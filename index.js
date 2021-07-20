@@ -21,10 +21,10 @@ const client = new Discord.Client({
 });
 require("dotenv").config()
 require('discord-reply');
-const Dataa = require('st.db');
-const db = new Dataa(`/Datas/tickets.json`);
-const countsdb = new Dataa(`/Datas/tickets-counts.json`);
-const ticketschannelsdb = new Dataa(`/Datas/tickets-channels.json`);
+const Database = require("quickmongo");
+const db = new Database(process.env.Mongo)
+const countsdb = db;
+const ticketschannelsdb = db;
 const randomstring = require("randomstring");
 const disbut = require('discord-buttons');
 require('discord-buttons')(client);
