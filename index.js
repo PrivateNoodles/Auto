@@ -1,3 +1,4 @@
+const fetch = require("node-fetch")
 const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: 'everyone',
