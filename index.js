@@ -121,7 +121,7 @@ client.on("message", async(message) =>{
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let args = message.content.split(' ').slice(1).join(' ');
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       let member = message.mentions.members.first() || message.guild.members.cache.get(args || message.guild.members.cache.find(x => x.user.username === args || x.user.username === args));
       if (!member) return message.lineReply(`Mention a member of its ID`);
       try {
@@ -152,7 +152,7 @@ client.on("message", async(message) =>{
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let args = message.content.split(' ').slice(1).join(' ');
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       let member = message.mentions.members.first() || message.guild.members.cache.get(args || message.guild.members.cache.find(x => x.user.username === args || x.user.username === args));
       if (!member) return message.lineReply(`Mention a member of its ID`);
       try {
@@ -179,7 +179,7 @@ client.on("message", async(message) =>{
   if (command == prefix + 'delete') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       message.lineReply({ embed: { description: `Your order is executed after 5 seconds, and it will be closed`, color: 0x5865F2 } })
       setTimeout(async () => {
         let log_embed = new Discord.MessageEmbed()
@@ -198,7 +198,7 @@ client.on("message", async(message) =>{
   if (command == prefix + 'close') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       let msg = await message.lineReply({ embed: { description: `Your order is executed after 5 seconds, and it will be closed`, color: 0x5865F2 } })
       setTimeout(async () => {
         try {
@@ -224,7 +224,7 @@ client.on("message", async(message) =>{
   if (command == prefix + 'open') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       let msg = await message.lineReply({ embed: { description: `Your order is executed after 5 seconds`, color: 0x5865F2 } })
       setTimeout(async () => {
         try {
@@ -267,7 +267,7 @@ client.on("message", async(message) =>{
   if (command == prefix + 'rename' || command == prefix + 'setname') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.has(`ticket_${channel.id}`) == true) {
+    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
       let args = message.content.split(' ').slice(1).join(' ');
       if (!args) return message.lineReply({ embed: { description: `Please select the name you want for the ticket`, color: 0x5865F2 } })
       channel.setName(args)
@@ -342,7 +342,7 @@ client.on("message", async(message) =>{
 
 client.on('clickMenu', async (button) => {
   console.log(button.values)
-  if (db.has(`tickets_${button.id}`) == true) {
+  if (db.get(`tickets_${button.id}`)) {
     await button.reply.send(`Your ticket is being processed. Please wait `, true)
     await countsdb.math(`counts_${button.message.id}`, `+`, 1)
     let count = await countsdb.get(`counts_${button.message.id}`)
@@ -539,9 +539,4 @@ client.on('clickMenu', async (button) => {
             }, 4000)
           }
         })
-client.on("ready", async () => {
-  await client.user.setActivity(config.status || `Bot Created by Tejas Lamba`)
-  console.clear()
-  console.log(`-------Tejas Lamba#1924-------`);
-})
 client.login(process.env.TOKEN);
