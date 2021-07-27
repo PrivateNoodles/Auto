@@ -53,10 +53,10 @@ client.on("message", async(message) =>{
   if (message.guild.id !== guild) return;
   
   const ch = message.guild.channels.cache.get(chan);
-  const code = message.content.match(/(?<=discord.gg\/)(.\S*)/g);
+  const code = message.content.match(/(?<=discord.gg\/)(.\S[a-zA-z0-9]*)/g) || message.content.match(/(?<=discord.com\/invite\/)(.\S[a-zA-z0-9]*)/g);
   if (code){
   if (pa.includes(message.channel.parentID)){
-  await fetch(`https://discord.com/api/invite/${code}`)
+  await fetch(`https://discord.com/api/invite/${code.replace("\\", "")}`)
    .then((res) => res.json())
    .then(async (json) => {
     if (json.message === 'Unknown Invite') {
