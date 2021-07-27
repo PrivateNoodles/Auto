@@ -512,6 +512,7 @@ client.on('clickMenu', async (button) => {
             }
           });
       client.on('clickButton', async (button) => {
+        button.clicker.fetch()
         if (button.id == "close") {
           let bu0tton = new disbut.MessageButton()
             .setStyle(`red`)
@@ -520,7 +521,7 @@ client.on('clickMenu', async (button) => {
           await button.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
         }
           if (button.id == "sure") {
-          await button.send(`Your order is executed after 5 seconds, and it will be closed`, true)   
+          await button.channel.send(`Your order is executed after 5 seconds, and it will be closed`, true)   
             let ch = button.channel
             if (!ch) return;
             setTimeout(async () => {
