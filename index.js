@@ -180,8 +180,8 @@ client.on("message", async(message) =>{
   if (command == prefix + 'delete') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
-      message.lineReply({ embed: { description: `Your order is executed after 5 seconds, and it will be closed`, color: 0x5865F2 } })
+    if (channel.name.startsWith("closed-")){
+      message.lineReply({ embed: { description: `Your order is executed after 15 seconds, and it will be closed`, color: 0x5865F2 } })
       setTimeout(async () => {
         let log_embed = new Discord.MessageEmbed()
             .setTitle(`Ticket Deleted`)
@@ -193,14 +193,14 @@ client.on("message", async(message) =>{
             .setFooter(message.guild.name, message.guild.iconURL())
           channelLog(log_embed)
           channel.delete()
-      }, 5000)
+      }, 16000)
     }
   }
   if (command == prefix + 'close') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.lineReply(`:x: This command requires \`MANAGE_MESSAGES\` permission.`);
     let channel = message.mentions.channels.first() || message.channel;
-    if (await ticketschannelsdb.get(`ticket_${channel.id}`)) {
-      let msg = await message.lineReply({ embed: { description: `Your order is executed after 5 seconds, and it will be closed`, color: 0x5865F2 } })
+    if (channel.name.startsWith("ticket-")){
+      let msg = await message.lineReply({ embed: { description: `Your order is executed after 15 seconds, and it will be closed`, color: 0x5865F2 } })
       setTimeout(async () => {
         try {
           msg.delete()
@@ -219,7 +219,7 @@ client.on("message", async(message) =>{
         } catch (e) {
           return message.channel.send(`An error occurred, please try again!`);
         }
-      }, 1000)
+      }, 15000)
     }
   }
   if (command == prefix + 'open') {
