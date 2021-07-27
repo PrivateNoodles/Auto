@@ -519,8 +519,8 @@ client.on('clickMenu', async (button) => {
             .setID("sure")
           await button.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
         }
-          if (button.id == `sure`) {
-          await button.reply.edit(`Your order is executed after 5 seconds, and it will be closed`, true)   
+          if (button.id == "sure") {
+          await button.send(`Your order is executed after 5 seconds, and it will be closed`, true)   
             let ch = button.channel
             if (!ch) return;
             setTimeout(async () => {
