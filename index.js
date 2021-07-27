@@ -56,7 +56,7 @@ client.on("message", async(message) =>{
   const code = message.content.match(/(?<=discord.gg\/)(.\S[a-zA-z0-9]*)/g) || message.content.match(/(?<=discord.com\/invite\/)(.\S[a-zA-z0-9]*)/g);
   if (code){
   if (pa.includes(message.channel.parentID)){
-  await fetch(`https://discord.com/api/invite/${code.replace("\\", "")}`)
+  await fetch(`https://discord.com/api/invite/${code}`)
    .then((res) => res.json())
    .then(async (json) => {
     if (json.message === 'Unknown Invite') {
@@ -472,6 +472,10 @@ client.on('clickMenu', async (button) => {
                     id: button.clicker.user.id,
                     allow: ['VIEW_CHANNEL', `READ_MESSAGE_HISTORY`, `ATTACH_FILES`, `SEND_MESSAGES`],
                   },
+                  {
+                    id: button.client.user.id,
+                    allow: ['VIEW_CHANNEL', `READ_MESSAGE_HISTORY`, `ATTACH_FILES`, `SEND_MESSAGES`,`MANAGE_MESSAGES`, "MANAGE_CHANNEL"],
+                  },
                 ], parent: config.category_id, position: 1, topic: `A Ticket : <@!${button.clicker.user.id}>`, reason: "All rights reserved to Visa2Code"
               }).then(async channel => {
                 channel = channel
@@ -507,16 +511,14 @@ client.on('clickMenu', async (button) => {
               }
             }
           });
-      client.on('clickButton', async (button1) => {
-        if (button1.id == "close") {
+      client.on('clickButton', async (button) => {
+        if (button.id == "close") {
           let bu0tton = new disbut.MessageButton()
             .setStyle(`red`)
-            .setLabel(`close`)
-            .setID(`sure`)
-          await button1.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
+            .setLabel("Confirm")
+            .setID("sure")
+          await button.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
         }
-      })
-        client.on('clickButton', async (button) => {
           if (button.id == `sure`) {
           await button.reply.edit(`Your order is executed after 5 seconds, and it will be closed`, true)   
             let ch = button.channel
@@ -539,5 +541,5 @@ client.on('clickMenu', async (button) => {
               }
             }, 4000)
           }
-        })
+       })
 client.login(process.env.TOKEN);
