@@ -391,7 +391,7 @@ client.on('clickMenu', async (button) => {
           .setStyle(`gray`)
           .setEmoji(`🔒`)
           .setLabel(`Close`)
-          .setID(idd)
+          .setID('close')
         channel.send(`Welcome <@!${button.clicker.user.id}>`, { embed: embedticket, component: bu1tton }).then(msg => {
           msg.pin()
         })
@@ -443,7 +443,7 @@ client.on('clickMenu', async (button) => {
               .setStyle(`gray`)
               .setEmoji(`🔒`)
               .setLabel(`Close`)
-              .setID(idd)
+              .setID("close")
             channel.send(`Welcome <@!${button.clicker.user.id}>`, { embed: embedticket, component: bu1tton }).then(msg => {
               msg.pin()
             })
@@ -499,7 +499,7 @@ client.on('clickMenu', async (button) => {
                   .setStyle(`gray`)
                   .setEmoji(`🔒`)
                   .setLabel(`Close`)
-                  .setID(idd)
+                  .setID("close")
                 channel.send(`Welcome <@!${button.clicker.user.id}>`, { embed: embedticket, component: bu1tton }).then(msg => {
                   msg.pin()
                 })
@@ -508,18 +508,18 @@ client.on('clickMenu', async (button) => {
             }
           });
       client.on('clickButton', async (button1) => {
-        if (button1.id == idd) {
+        if (button1.id == "close") {
           let bu0tton = new disbut.MessageButton()
             .setStyle(`red`)
             .setLabel(`close`)
-            .setID(idd + `sure`)
+            .setID(`sure`)
           await button1.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
         }
       })
         client.on('clickButton', async (button) => {
-          if (button.id == idd + `sure`) {
-          await button1.reply.edit(`Your order is executed after 5 seconds, and it will be closed`, true)   
-            let ch = channel
+          if (button.id == `sure`) {
+          await button.reply.edit(`Your order is executed after 5 seconds, and it will be closed`, true)   
+            let ch = button.channel
             if (!ch) return;
             setTimeout(async () => {
               try {
@@ -535,7 +535,7 @@ client.on('clickMenu', async (button) => {
                   .setColor(`YELLOW`)
                 channelLog(log_embed)
               } catch (e) {
-                return message.channel.send(`An error occurred, please try again!`);
+                return button.reply.edit(`An error occurred, please try again!`);
               }
             }, 4000)
           }
