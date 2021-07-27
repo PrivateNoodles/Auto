@@ -521,7 +521,7 @@ client.on('clickMenu', async (button) => {
           await button.reply.send(`Are you sure you want to close this ticket?`, { component: bu0tton, ephemeral: true });
         }
           if (button.id == "sure") {
-          await button.channel.send(`Your order is executed after 5 seconds, and it will be closed`, true)   
+          await button.channel.send(`This ticket was requested to be closed. This will be executed after 15 seconds, and it will be closed`, true)   
             let ch = button.channel
             if (!ch) return;
             setTimeout(async () => {
@@ -529,7 +529,7 @@ client.on('clickMenu', async (button) => {
                 await ch.send({ embed: { description: `The ticket has already been closed <@!${button.clicker.user.id}>`, color: `YELLOW` } });
                 let type = 'member'
                 await Promise.all(ch.permissionOverwrites.filter(o => o.type === type).map(o => o.delete()));
-                ch.setName(`closed-${await ticketschannelsdb.get(`ticket_${ch.id}`).count}`)
+                ch.setName(`closed-ticket`)
                 let log_embed = new Discord.MessageEmbed()
                   .setTitle(`Ticket closed`)
                   .addField(`Ticket`, `<#${ch.id}>`)
@@ -540,7 +540,7 @@ client.on('clickMenu', async (button) => {
               } catch (e) {
                 return button.reply.edit(`An error occurred, please try again!`);
               }
-            }, 4000)
+            }, 15000)
           }
        })
 client.login(process.env.TOKEN);
