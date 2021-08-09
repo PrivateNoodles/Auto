@@ -474,7 +474,7 @@ client.on('clickMenu', async (button) => {
                   },
                   {
                     id: button.client.user.id,
-                    allow: ['VIEW_CHANNEL', `READ_MESSAGE_HISTORY`, `ATTACH_FILES`, `SEND_MESSAGES`,`MANAGE_MESSAGES`, "MANAGE_CHANNEL"],
+                    allow: ['VIEW_CHANNEL', `READ_MESSAGE_HISTORY`, `ATTACH_FILES`, `SEND_MESSAGES`,`MANAGE_MESSAGES`],
                   },
                 ], parent: config.category_id, position: 1, topic: `A Ticket : <@!${button.clicker.user.id}>`, reason: "All rights reserved to Visa2Code"
               }).then(async channel => {
